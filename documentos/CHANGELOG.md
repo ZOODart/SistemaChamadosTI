@@ -28,3 +28,10 @@
 - primeiro registro no banco de dados do usuario Gustavo
 - primeiro listamento de usuarios dentro do banco
 - tabela de colegio pronto
+
+## versao 0.0.5 - 01/07/2026
+- tabela usuario_colegio pronto
+- login no github feito e codigo subindo
+- cadastro de colegio feito
+- listar colegio feito
+- cadastro de usuario em colegio feito
