@@ -35,3 +35,7 @@
 - cadastro de colegio feito
 - listar colegio feito
 - cadastro de usuario em colegio feito
+
+## versao 0.0.6 - 03/07/2026
+- tabela de chamados adicionado
+- cadastro de chamados adicionado

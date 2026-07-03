@@ -48,6 +48,32 @@ def criar_tabelas():
             )
         """)
     
+## tabela chamado
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS chamados (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                colegio_id INTEGER NOT NULL,
+                tecnico_id INTEGER NOT NULL,
+
+                titulo TEXT NOT NULL,
+                descricao TEXT NOT NULL,
+
+                equipamento_id INTEGER,
+
+                status TEXT NOT NULL,
+                prioridade TEXT NOT NULL,
+
+                solucao TEXT,
+
+                aberto_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                encerrado_em TIMESTAMP,
+
+                FOREIGN KEY (colegio_id) REFERENCES colegios(id),
+                FOREIGN KEY (tecnico_id) REFERENCES usuario(id)
+            )
+        """)
+    
     conexao.commit()
     conexao.close()
 
@@ -90,6 +116,25 @@ def cadastrar_usuario_colegio(usuario_id, colegio_id):
     """,(usuario_id, colegio_id)
     )
 
+    conexao.commit()
+    conexao.close()
+
+## cadastrar chamado
+
+def cadastrar_chamado(
+        colegio_id, tecnico_id, titulo, descricao, equipamento_id, status, prioridade
+        ):
+    
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        INSERT INTO chamados (
+                colegio_id, tecnico_id, titulo, descricao, equipamento_id, status, prioridade
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (colegio_id, tecnico_id, titulo, descricao, equipamento_id, status, prioridade)
+        )
+    
     conexao.commit()
     conexao.close()
 
