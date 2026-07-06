@@ -166,3 +166,134 @@ def listar_colegios():
     
     return colegios
 
+## listar chamados
+
+def listar_chamados():
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("SELECT * FROM chamados")
+
+    chamados = cursor.fetchall()
+
+    conexao.close
+
+    return chamados
+
+## listar chamados por status
+
+def listar_chamados_por_status(status):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""SELECT * FROM chamados WHERE status = ?""", (status,) )
+
+    chamados = cursor.fetchall()
+
+    conexao.close
+
+    return chamados
+
+## listar chamados por colegio
+
+def listar_chamados_por_colegio(colegio_id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""SELECT * FROM chamados WHERE colegio_id = ?""", (colegio_id,) )
+
+    chamados = cursor.fetchall()
+
+    conexao.close
+
+    return chamados
+
+## listar chamados por tecnico
+
+def listar_chamados_por_tecnico(tecnico_id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""SELECT * FROM chamados WHERE tecnico_id = ?""", (tecnico_id,) )
+
+    chamados = cursor.fetchall()
+
+    conexao.close
+
+    return chamados
+
+## buscar chamado
+
+def buscar_chamado_por_id(id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute ("""SELECT * FROM chamados WHERE id = ? 
+""", (id,)
+        )
+    
+    chamado = cursor.fetchone()
+
+    conexao.close
+    return chamado
+
+## alterar status
+
+def alterar_status(id, status):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute ("""UPDATE chamados SET status = ? WHERE id = ?
+""", (status, id)
+        )
+
+    conexao.commit()
+    conexao.close()
+    
+    ## alterar solucao
+
+def alterar_solucao(id, solucao):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute ("""UPDATE chamados SET 
+                solucao = ? 
+                WHERE id = ?
+""", (solucao, id)
+        )
+
+    conexao.commit()
+    conexao.close()
+
+## encerrar chamado
+
+def encerrar_chamado(id,solucao):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute ("""UPDATE chamados SET
+                status = ?,
+                solucao = ?,
+                encerrado_em = CURRENT_TIMESTAMP WHERE id = ? 
+""", ("resolvido", solucao, id)
+        )
+    
+    conexao.commit()
+    conexao.close()
+
+def fazer_login(nome, senha):
+        conexao = conectar()
+        cursor = conexao.cursor()
+
+        cursor.execute ("""SELECT * FROM usuarios WHERE 
+                        nome = ?
+                        AND senha = ?
+                        AND ativo = 1
+""", (nome, senha)
+        )
+        
+        usuario = cursor.fetchone()
+
+        conexao.close() 
+
+        return usuario

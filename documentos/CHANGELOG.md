@@ -39,3 +39,15 @@
 ## versao 0.0.6 - 03/07/2026
 - tabela de chamados adicionado
 - cadastro de chamados adicionado
+
+## versao 0.0.7 - 06/07/2026
+- cadastro de chamado testado
+- listagem de chamado adicionado e testado
+- busca de chamado adicionado e testado
+- alterar status foi adicionado
+- alterar soluçao foi adicionado
+- encerrar chamado foi adicionado
+- filtrar chamado por status adicionado
+- filtrar chamado por colegio adicionado
+- filtrar chamados por tecnico adicionado
+- login de usuario adicionado
