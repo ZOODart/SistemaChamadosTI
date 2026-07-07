@@ -222,6 +222,25 @@ def listar_chamados_por_tecnico(tecnico_id):
 
     return chamados
 
+## listar colegios do usuario
+
+def listar_colegios_do_usuario(usuario_id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""SELECT colegios.* FROM colegios JOIN usuarios_colegios 
+            ON colegios.id = usuarios_colegios.colegio_id 
+            WHERE usuarios_colegios.usuario_id = ?
+            AND usuarios_colegios.ativo = 1
+""", (usuario_id,)
+        )
+    
+    colegios = cursor.fetchall()
+
+    conexao.close
+
+    return colegios
+
 ## buscar chamado
 
 def buscar_chamado_por_id(id):
@@ -236,6 +255,36 @@ def buscar_chamado_por_id(id):
 
     conexao.close
     return chamado
+
+## buscar usuario por id
+
+def buscar_usuario_por_id(id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute ("""SELECT * FROM usuarios WHERE id = ? 
+""", (id,)
+        )
+    
+    usuarios = cursor.fetchone()
+
+    conexao.close
+    return usuarios
+
+## buscar colegio por id
+
+def buscar_colegio_por_id(id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute ("""SELECT * FROM colegios WHERE id = ? 
+""", (id,)
+        )
+    
+    colegios = cursor.fetchone()
+
+    conexao.close
+    return colegios
 
 ## alterar status
 

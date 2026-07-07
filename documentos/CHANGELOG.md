@@ -51,3 +51,9 @@
 - filtrar chamado por colegio adicionado
 - filtrar chamados por tecnico adicionado
 - login de usuario adicionado
+
+## versao 0.0.8 - 07/07/2026
+- busca de usuario por id adicionado
+- busca de colegio por id adicionado
+- relacao entre colegio e usuario adicionado
+- funçao inicializar no sistema

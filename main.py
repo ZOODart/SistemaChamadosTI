@@ -14,23 +14,28 @@ from banco.database import (
     listar_chamados_por_status,
     listar_chamados_por_colegio,
     listar_chamados_por_tecnico,
-    fazer_login
+    fazer_login,
+    buscar_usuario_por_id,
+    buscar_colegio_por_id,
+    listar_colegios_do_usuario
 ) 
 
 def main():
     criar_tabelas ()
     
-    usuario = fazer_login("Gustavo", "anglo2026")
-
-    print("======================")
+def iniciar_sistema():
+    nome = input("usuario: ")
+    senha = input("senha: ")
+    
+    usuario = fazer_login(nome, senha)
     if usuario:
         print("login realizado com sucesso")
     else:
         print("Usuario ou senha invalidos")
-    print("======================")
+    
+print("sistema iniciado com sucesso!")
+print("======================")
 
-    print("======================")
-    print("sistema iniciado com sucesso!")
-    print("======================")
 if __name__ == "__main__":
     main()
+    iniciar_sistema()
