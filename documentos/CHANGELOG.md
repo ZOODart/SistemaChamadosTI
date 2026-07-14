@@ -57,3 +57,9 @@
 - busca de colegio por id adicionado
 - relacao entre colegio e usuario adicionado
 - funçao inicializar no sistema
+
+## versao 0.0.9 - 14/07/2026
+- iniciar sistema adicionado
+- selecionar colegio adicionado
+- menu principal adicionado 
+- funçao abrir chamado adicionado no menu
