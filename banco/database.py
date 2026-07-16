@@ -176,7 +176,7 @@ def listar_chamados():
 
     chamados = cursor.fetchall()
 
-    conexao.close
+    conexao.close()
 
     return chamados
 
@@ -190,7 +190,24 @@ def listar_chamados_por_status(status):
 
     chamados = cursor.fetchall()
 
-    conexao.close
+    conexao.close()
+
+    return chamados
+
+## listar chamados no dashboard
+
+def listar_chamados_por_status_e_colegio(status, colegio_id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""SELECT * FROM chamados WHERE 
+                    status = ?
+                    AND colegio_id = ?""", (status, colegio_id) 
+        )
+
+    chamados = cursor.fetchall()
+
+    conexao.close()
 
     return chamados
 
@@ -204,7 +221,7 @@ def listar_chamados_por_colegio(colegio_id):
 
     chamados = cursor.fetchall()
 
-    conexao.close
+    conexao.close()
 
     return chamados
 
@@ -218,7 +235,7 @@ def listar_chamados_por_tecnico(tecnico_id):
 
     chamados = cursor.fetchall()
 
-    conexao.close
+    conexao.close()
 
     return chamados
 
@@ -237,7 +254,7 @@ def listar_colegios_do_usuario(usuario_id):
     
     colegios = cursor.fetchall()
 
-    conexao.close
+    conexao.close()
 
     return colegios
 
@@ -253,7 +270,7 @@ def buscar_chamado_por_id(id):
     
     chamado = cursor.fetchone()
 
-    conexao.close
+    conexao.close()
     return chamado
 
 ## buscar usuario por id
@@ -268,7 +285,7 @@ def buscar_usuario_por_id(id):
     
     usuarios = cursor.fetchone()
 
-    conexao.close
+    conexao.close()
     return usuarios
 
 ## buscar colegio por id
@@ -283,7 +300,7 @@ def buscar_colegio_por_id(id):
     
     colegios = cursor.fetchone()
 
-    conexao.close
+    conexao.close()
     return colegios
 
 ## alterar status
@@ -324,11 +341,13 @@ def encerrar_chamado(id,solucao):
                 status = ?,
                 solucao = ?,
                 encerrado_em = CURRENT_TIMESTAMP WHERE id = ? 
-""", ("resolvido", solucao, id)
+""", ("encerrado", solucao, id)
         )
     
     conexao.commit()
     conexao.close()
+
+## Login
 
 def fazer_login(nome, senha):
         conexao = conectar()

@@ -17,7 +17,8 @@ from banco.database import (
     fazer_login,
     buscar_usuario_por_id,
     buscar_colegio_por_id,
-    listar_colegios_do_usuario
+    listar_colegios_do_usuario,
+    listar_chamados_por_status_e_colegio
 ) 
 
 def main():
@@ -86,7 +87,7 @@ def menu_principal(usuario, colegio):
         print()
         print("1 - Abrir chamado")
         print("2 - Chamados abertos")
-        print("3 - Listar chamado")
+        print("3 - Historico de chamados")
         print("4 - Buscar chamado")
         print("5 - Trocar de usuario")
         print("6 - Chamados encerrados")
@@ -100,7 +101,7 @@ def menu_principal(usuario, colegio):
             print(abrir_chamado(usuario, colegio))
 
         elif opcao == "2":
-             print("Chamados abertos")
+             print(lista_dos_chamados_abertos(colegio))
 
         elif opcao == "3":
              print("Lista de chamados")
@@ -132,7 +133,7 @@ def abrir_chamado(usuario, colegio):
     titulo = input("Titudo do chamado: ")
     descricao = input("Descrição: ") 
     equipamento = input("Qual equipamento: ")
-    status = input("Status:")
+    status = "aberto"
     prioridade = input("Prioridade: ")
      
     cadastrar_chamado(
@@ -142,6 +143,88 @@ def abrir_chamado(usuario, colegio):
         )
     
     print("Chamado cadastrado com sucesso!")
+
+    print("\n1 - Encerrar chamado")
+    print("\n0 - Voltar")
+
+    opcao = input("\nEscolha uma opção:")
+        
+    if opcao == "1":
+        encerrar_chamado_main()
+    elif opcao == "0":
+        return
+    else:
+         print("Opção invalida")
+
+## listar chamados
+
+def lista_dos_chamados_abertos(colegio):
+    
+    while True:
+        chamados = listar_chamados_por_status_e_colegio("aberto", colegio[0])
+
+        print("\n=============== CHAMADOS ABERTOS ==================")
+     
+        if len(chamados) == 0:
+         print("Nenhum chamado aberto")
+        else:
+            for i, chamado in enumerate(chamados, start=1):
+                print(f"{i} - {chamado[3]}")
+
+        print("\n0 - Voltar")
+        
+        opcao = input("Escolha um chamado: ")
+
+        if opcao == "0":
+            return
+        
+        if opcao.isdigit():
+            opcao = int(opcao)
+
+            if 1 <= opcao <= len(chamados):
+                chamado = chamados[opcao - 1]
+
+            visualizar_chamado(chamado)
+            continue
+
+        print("Opção invalida")
+
+## visualizar chamado
+
+def visualizar_chamado(chamado):
+        
+        print("=================================")
+        print(f"Titulo: {chamado[3]}")
+        print(f"Descriçao: {chamado[4]}")
+        print(f"Equipamento: {chamado[5]}")
+        print(f"Status: {chamado[6]}")
+        print(f"Prioridade: {chamado[7]}")
+        print("=================================")
+
+        print("\n1 - Encerrar chamado")
+        print("\n0 - Voltar")
+        
+        opcao = input("Escolha: ")
+
+        if opcao == "1":
+            encerrar_chamado_main(chamado)
+
+        elif opcao == "0":
+             return
+        
+        else:
+             print("Opção invalida")
+
+## encerrar chamado
+
+def encerrar_chamado_main(chamado):
+     
+     print("\n====== ENCERRAR CHAMADO ======")
+
+     solucao = input("Solução: ")
+     encerrar_chamado(chamado[0], solucao)
+
+     print("\nChamado encerrado com sucesso!")
 
 if __name__ == "__main__":
     main()

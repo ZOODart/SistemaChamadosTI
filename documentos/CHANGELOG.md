@@ -63,3 +63,11 @@
 - selecionar colegio adicionado
 - menu principal adicionado 
 - funçao abrir chamado adicionado no menu
+
+## versao 0.0.10 - 15/07/2026
+- funçao lista de chamados abertos
+- logica da pagina dos chamados abertos
+
+## versao 0.0.11 - 16/07/2026
+- funcao encerrar chamado
+- encerrar chamado pela visualizaçao de chamados
