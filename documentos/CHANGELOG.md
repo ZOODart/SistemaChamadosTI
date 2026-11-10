@@ -71,3 +71,6 @@
 ## versao 0.0.11 - 16/07/2026
 - funcao encerrar chamado
 - encerrar chamado pela visualizaçao de chamados
+
+## versao 0.0.11 - 10/11/2026
+- atualizei algumas documentações do projeto
